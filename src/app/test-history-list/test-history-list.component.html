@@ -1,0 +1,36 @@
+<!-- <ul *ngIf="tests" class="list-group">
+    <li *ngFor="let test of tests" class="list-group-item">
+        <label>
+            {{test.code}}
+            {{test.date.getDate()}}
+            {{test.description}}
+            {{test.grade}}
+        </label>
+    </li>
+</ul> -->
+<!-- {{testsToShow | json}}  -->
+<table *ngIf="testsToShow && testsToShow?.length>0" class="table">
+    <thead>
+        <h4>Test History List</h4> 
+        <div>
+        <label>Student Average:</label>
+        <h5>{{this.average}}</h5>
+        </div>
+        <tr>
+            <th scope="col">Code</th>
+            <th scope="col">Date</th>
+            <th scope="col">Description</th>
+            <th scope="col">Grade</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- {{testsToShow | json}} -->
+        <tr *ngFor="let test of testsToShow">
+            <th>{{test.code}}</th>   
+            <td>{{test.date  | date: 'dd/MM/yyyy'}}</td>
+            <td>{{test.description}}</td>
+            <td>{{test.grade}}</td>
+        </tr>
+    </tbody>
+   
+</table>

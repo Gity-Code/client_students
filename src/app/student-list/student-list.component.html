@@ -1,0 +1,78 @@
+
+<div *ngIf="isLoad==false"> 
+
+    <button class="btn btn-primary" type="button" disabled>
+  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+  <span class="visually-hidden">Loading...</span>
+</button>
+
+</div>
+<div *ngIf="students">
+    <student-observable [students]="students"></student-observable>
+</div>
+<input type="checkbox" #chb (change)="ShowStudentsByActive(chb.checked)">Active Students<br>
+
+<ul class="list-group">
+    <!-- <h1>Students List
+        <button class="btn btn-primary btn-new-student" (click)="showNewStudentDetails()">Add New Student</button>
+    </h1> -->
+    <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            Students List
+        </li>
+        <li class="nav-item" role="presentation"  (click)="showNewStudentDetails()">
+           New Student
+        </li>
+     
+      </ul> -->
+
+
+
+
+
+
+
+
+
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">Students List
+
+   
+          </span>
+        </div>
+      </nav>
+
+      <button class="btn btn-primary btn-new-student" (click)="showNewStudentDetails()">Add New Student</button>
+
+
+
+
+
+
+
+
+    <li *ngFor="let student of students" class="list-group-item" (click)="showDetails(student)"
+        [ngClass]="{'list-group-item-secondary': !student.active}">
+        <div class="row">
+            <div class="col-1">{{student.idStudent}}</div>
+            <div class="col-3">
+                <button class="btn btn-secondary" (click)="showDetails(student)">Edit Details</button>
+                <!-- <button class="btn btn-primary" type="button" (click)="showDetails(student)" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Edit Details
+                  </button>          -->
+            </div>
+            <div class="col-3">
+                <button class="btn btn-light" (click)="deleteStudent(student)">Delete Student <i class="fas fa-trash-alt"></i></button>
+
+            </div>
+            <div class="col-1" *ngIf="student.average > 90">
+                <i class="far fa-laugh-beam"></i>
+            </div>
+        </div>
+    </li>
+</ul>
+<br />
+<br />
+<student-details *ngIf="selectedStudent" [student]="selectedStudent" (onSaveStudent)="saveStudentToList($event)">
+</student-details>

@@ -1,0 +1,108 @@
+<!-- < <button class="btn btn-primary" type="button"  data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Edit Details
+                  </button>          -->
+
+<!-- <div class="collapse" id="collapseExample"> -->
+<div class="card" *ngIf="student else noStudent">
+    <div class="card-body">
+        <form [formGroup]="studentForm">
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="idStudent" class="is-invalid">Student id:</label>
+                    <input type="text" class="form-control" id="idStudent" formControlName="idStudent">
+                    <ng-container *ngIf="studentForm.controls.idStudent.errors">
+                        <div class="text-danger" *ngIf="studentForm.controls.idStudent.errors.required">this field is
+                            reqiured
+                        </div>
+                        <div class="text-danger" *ngIf="studentForm.controls.idStudent.errors.minlength">this field must
+                            be at
+                            least 9 chars</div>
+                        <div class="text-danger" *ngIf="studentForm.controls.idStudent.errors.maxlength">this field must
+                            be max
+                            9 chars</div>
+                    </ng-container>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="firstName">Student First Name:</label>
+                    <input type="text" class="form-control" id="firstName" formControlName="firstName">
+                    <ng-container *ngIf="studentForm.controls.firstName.errors">
+                        <div class="text-danger" *ngIf="studentForm.controls.firstName.errors.required">this field is
+                            reqiured</div>
+                    </ng-container>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="lastName">Student Last Name:</label>
+                    <input type="text" class="form-control" id="lastName" formControlName="lastName">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="email">Student Email:</label>
+                    <input type="email" class="form-control" id="email" formControlName="email">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="address">Student Adress:</label>
+                    <input type="text" class="form-control" id="address" formControlName="address">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="phone">Student phone Number:</label>
+                    <input type="tel" class="form-control" id="phone" formControlName="phone">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="professionId">Profession:</label>
+                    <select class="form-control" formControlName="professionId">
+                        <option *ngFor="let profession of professionsList" [value]="profession.id">{{profession.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+
+                <div class="form-group col-md-3">
+                    <label for="active">Student is Active:</label>
+                    <input type="text" class="form-control" id="active" formControlName="active">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="leavingDate">Student Leaving Date:</label>
+                    <input type="date" class="form-control" id="leavingDate" formControlName="leavingDate">
+                </div>
+                <div class="form-group">
+                    <label for="year">Year:</label>
+                    <br>
+                    <input type="radio" value="Year.A" name="year" formControlName="year" />A
+                    <!-- <br> -->
+                    <input type="radio" value="Year.B" name="year" formControlName="year" />B
+                    <!-- <br> -->
+                    <input type="radio" value="Year.C" name="year" formControlName="year" />C
+                </div>
+                <br>
+                <div [ngSwitch]="studentForm.controls.year.value">
+                    <div *ngSwitchCase="'Year.A'">
+                        200 days of year
+                    </div>
+                    <div *ngSwitchCase="'Year.B'">
+                        250 days of year
+                    </div>
+                    <div *ngSwitchCase="'Year.C'">
+                        300 days of year
+                    </div>
+                    <div *ngSwitchDefault>
+                        Select a year
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="btn btn-primary" (click)="saveNewStudent()" [disabled]="!studentForm.valid">save</button>
+            <!-- {{studentForm.value | json}} -->
+        </form>
+    </div>
+</div>
+<!-- </div> -->
+
+
+<ng-template #noStudent>
+    <div class="card-subtitle">
+        No Student To Display
+    </div>
+</ng-template>
